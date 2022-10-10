@@ -28,7 +28,7 @@ def conv_video(route:str, convert_to:str, folder = False, delete_original = Fals
 
 
 
-    video_formats = ['.mp4', '.mov', '.wav', '.avi', '.mkv', '.flv', '.wmv']
+    video_formats = ['.mp4', '.mov', '.wav', '.avi', '.mkv', '.flv', '.wmv', '.MP4', '.MOV', '.WAV', '.AVI', '.MKV', '.FLV', '.WMV','.Mov', '.Wav', '.Avi', '.Mkv', '.Flv', '.Wmv']
     
     if folder == True:
 
@@ -176,4 +176,3 @@ def conv_video(route:str, convert_to:str, folder = False, delete_original = Fals
         
 
             print('Hemos convertido tu archivo de manera satisfactoria! Revisalo.')
-
