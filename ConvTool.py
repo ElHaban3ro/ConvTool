@@ -177,8 +177,3 @@ def conv_video(route:str, convert_to:str, folder = False, delete_original = Fals
 
             print('Hemos convertido tu archivo de manera satisfactoria! Revisalo.')
 
-
-
-
-
-conv_video(folder = False, convert_to = 'mp4', delete_original = False, route = r'C:/Users/ferdh/Desktop/Projects/Youtube/Global Resources/Analog Video Package/Assets/Textures (Glitches)/VHS Glitch Long 4 (Screen).Mov')
