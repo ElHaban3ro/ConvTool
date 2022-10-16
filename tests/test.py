@@ -1,5 +1,3 @@
-from ConvTool import conv_video
+from ConvTool import conv_image
 
-
-
-conv_video(folder = True, convert_to = 'mp4', delete_original = True, route = r'C:\Users\ferdh\Desktop\Projects\Youtube\Global Resources\Analog Video Package\Assets\Textures (Glitches)')
+conv_image(route = 'C:/mitest.ico', convert_to = 'png', folder = False, delete_original = False)

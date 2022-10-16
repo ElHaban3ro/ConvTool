@@ -7,11 +7,10 @@
 
 ## Summary and details
 ---
-This library makes use of ***MoviePy*** (not the one I have in my github, it is another library intended to work with video files). The main idea of this project is that you can convert your video files in a considerably easy way. Convert your entire **folders** or **video files** with ***ConvTool***. In the future I will be creating a version that supports many more formats and even a graphical interface.
+A unified **package** to convert your videos or images to another **image**/**video** format. Convert a whole ***folder*** from that **format** to a different one, or if you prefer, *convert just one*!
 
 - Python Version: **3.10**
 - Pip Version: **The Lastest version**
-- MoviePy Version: **1.0.3**
 
 
 
@@ -41,6 +40,33 @@ This library makes use of ***MoviePy*** (not the one I have in my github, it is 
   - AVI
   - FLV
   - MKV
+
+---
+
+#### - conv_image(route, convert_to, folder, delete_original)
+> Convert your image files, or an ENTIRE folder with image files to a different format!
+
+- ***Parameters:*** 
+    
+    - route: **string** | Path of your image or folder to convert!
+
+    - convert_to: **string** | Format you want to convert the image to.
+
+    - folder: **boolean** | If you want to convert a folder with images files, this has to be set to True. 
+
+    - delete_original: **boolean** | If you want that when converting the image to the desired format, the original image is completely deleted, you should leave this parameter to True.
+  
+> The formats supported are:
+
+  - BMP
+  - GIF
+  - JPG
+  - JPEG
+  - PNG
+  - ICO
+  - TIFF
+
+
 
 
 ## Use
@@ -77,6 +103,8 @@ from ConvTool.ConvTool import conv_video
 And with that done, start using it as follows:
 
 ```python
+from ConvTool.ConvTool import conv_video
+
 conv = conv_video(folder = False, convert_to = 'mp4', delete_original = True, route = r'miruta/archivo.mov')
 ```
 
@@ -85,6 +113,10 @@ conv = conv_video(folder = False, convert_to = 'mp4', delete_original = True, ro
 
 
 
+# (v1.0) Images Update. ¿What's New?
+- Support for converting images to different formats!
+- Cleaner code (a bit :c)
+- Intentions to add support for converting text files in next updates!
 
 
 

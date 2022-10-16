@@ -2,6 +2,7 @@
 import os
 from moviepy.editor import VideoFileClip
 
+from PIL import Image
 
 
 # noinspection PyShadowingBuiltins
@@ -69,7 +70,7 @@ def conv_video(route: str, convert_to: str, folder=False, delete_original=False)
                 extension = file[::-1].split('.')[0][::-1]
                 video = VideoFileClip(f'{route}/{file}')
 
-                new_folder_name = f'[CT - Folder] {actual_folder}'
+                new_folder_name = f'[CT - Folder Video] {actual_folder}'
 
                 try:
                     os.mkdir(f'{route}/{new_folder_name}')
@@ -141,16 +142,46 @@ def conv_video(route: str, convert_to: str, folder=False, delete_original=False)
 
 
 def conv_image(route: str, convert_to: str, folder=False, delete_original=False):
-    imgs_formats = ['BMP', 'GIF', 'JPG', 'JPEG', 'PNG', 'Bmp', 'Gif', 'Jpg', 'Jpeg',
-                    'Png', 'bpm', 'gif', 'jpg', 'jpeg', 'png']  # Formats Avalable
+    imgs_formats = ['BMP', 'GIF', 'JPG', 'JPEG', 'PNG', 'ICO', 'TIFF', 'Bmp', 'Gif', 'Jpg', 'Jpeg',
+                    'Png', 'Ico', 'Tiff', 'bmp', 'gif', 'jpg', 'jpeg', 'png', 'ico', 'tiff']  # Formats Avalable
+
+    """
+    Convert your image files, or an ENTIRE folder with image files to a different format!
+        
+        
+    Parameters
+    ----------
+
+    route: **string** | Path of your image or folder to convert!
+
+    convert_to: **string** | Format you want to convert the files to.
+
+    folder: **boolean** | If you want to convert a folder with image files, this has to be set to True. 
+
+    delete_original: **boolean** | If you want that when converting the image to the desired format, the original file is
+    completely deleted, you should leave this parameter to True.
+
+    """
+
+
+    if convert_to not in imgs_formats:
+        raise ValueError(
+            '(NewFormatError, error 03) The format provided is not supported by the package. (If your format is truly an image format, please contact me by discord. User in the repository).')
 
     if folder:
+        print(f'Converting your images to {convert_to}!!')
+
         # Directory Started Config.
-        content_acutal_folder = os.listdir(route)  # The list of absolutely all files in the given folder.
+        try:
+            content_acutal_folder = os.listdir(route)  # The list of absolutely all files in the given folder.
+        except NotADirectoryError:
+            raise ValueError('(NotAFolderError, error 01) You route not is a folder!')
 
         files_extensions = []  # List of the image extensions.
         files_names = []  # List of the images names.
+        actual_folder = os.path.dirname(route)
 
+        # Files iterate.
         for content in content_acutal_folder:
             file_extension = content[::-1][:content[::-1].find('.')][::-1]  # Extract file extension.
             file_name = content[::-1][content[::-1].find('.'):][::-1][:-1]  # Extract file name.
@@ -161,10 +192,50 @@ def conv_image(route: str, convert_to: str, folder=False, delete_original=False)
                 files_names.append(file_name)  # Add name!
                 files_extensions.append(file_extension)  # Add extension
 
+        # We make sure that the folder is not empty or does not contain any images,
+        # so as not to execute code in error.
+        if len(files_names) == 0:
+            print('Your folder is empty or does not contain any valid image files.')
+            exit()
+
+        if actual_folder.count('/') >= 2:
+            folder_n = actual_folder.split('/')[-1]
+
+        else:
+            folder_n = actual_folder.split('\\')[-1]
+
         # Convert image folder:
+        for c, file in enumerate(files_names):
+            # Open image file.
+            img = Image.open(f'{route}/{file}.{files_extensions[c]}')
+
+            # Set a name to the new folder.
+            new_folder_name = f'[CT - Folder] {folder_n}'
+
+            # Try to create folder.
+            try:
+                os.mkdir(f'{route}/{new_folder_name}')
+
+            except FileExistsError:
+                pass
+
+            if convert_to != ['ico', 'ICO', 'Ico', 'PNG', 'Png', 'png', 'TIFF', 'Tiff', 'tiff']:
+                img = img.convert('RGB')
+
+            # Now, save image in the new format!
+            img.save(f'{route}/{new_folder_name}/{file}.{convert_to}')
+            img.close()
+
+            # If is necessary, delete files.
+            if delete_original:
+                os.remove(f'{route}/{file}.{files_extensions[c]}')
+
+        print('All images have been successfully converted! 🚀')
 
 
     else:
+        print(f'Converting your image to {convert_to}!!')
+
         # Directory Started Config.
         actual_folder = os.path.dirname(route)  # Sets the current folder.
         actual_file = os.path.basename(route)  # Sets the current file.
@@ -172,9 +243,23 @@ def conv_image(route: str, convert_to: str, folder=False, delete_original=False)
         file_extension = actual_file[::-1][:actual_file[::-1].find('.')][::-1]  # Sets the file extension.
         file_name = actual_file[::-1][actual_file[::-1].find('.'):][::-1][:-1]  # Sets the file name.
 
+        if file_extension not in imgs_formats:
+            raise ValueError('(NotAImageFileError, error 02) Your file not is a image file.')
+
         # Convert Image:
+        image = Image.open(f'{actual_folder}/{actual_file}')
+
+        if convert_to != ['ico', 'ICO', 'Ico', 'PNG', 'Png', 'png', 'TIFF', 'Tiff', 'tiff']:
+            image = image.convert('RGB')
+
+        image.save(f'{actual_folder}/[CT - File] {file_name}.{convert_to}')
+        image.close()
+
+        # If is necessary, delete files.
+        if delete_original:
+            os.remove(f'{route}')
+
+        print('Your image have been successfully converted! 🚀')
 
 
-conv_image(
-    r'C:\Users\ferdh\Desktop\Projects\Youtube\Global Resources\Analog Video Package\Assets\Still Overlays\Scanlines.png',
-    'jpg', False, False)
+conv_image(r'C:\Users\ferdh\Downloads\yo.ico', 'png', False, True)
