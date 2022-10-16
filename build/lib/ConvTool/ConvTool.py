@@ -1,7 +1,7 @@
 # Libraries
 import os
-from moviepy.editor import VideoFileClip
 
+from moviepy.editor import VideoFileClip
 
 
 # noinspection PyShadowingBuiltins
@@ -51,7 +51,7 @@ def conv_video(route: str, convert_to: str, folder=False, delete_original=False)
 
                     else:
                         route_without_folder = f'{folder}/'
-
+                        
             else:
                 actual_folder = route.split('/')[-1]
 
@@ -74,7 +74,8 @@ def conv_video(route: str, convert_to: str, folder=False, delete_original=False)
                 try:
                     os.mkdir(f'{route}/{new_folder_name}')
 
-                except FileExistsError:
+                except ValueError:
+                    pass
                     print('Se ha intentado crear una carpeta ya existente.')
 
                 video.write_videofile(
@@ -99,6 +100,8 @@ def conv_video(route: str, convert_to: str, folder=False, delete_original=False)
                 route_actual_folder = route.split('\\')[:-1]
                 route_without_file = ''
 
+
+
                 for e, folder in enumerate(route_actual_folder):
                     if e >= 1:
                         route_without_file = f'{route_without_file}/{folder}'
@@ -111,6 +114,8 @@ def conv_video(route: str, convert_to: str, folder=False, delete_original=False)
 
                 route_actual_folder = route.split('/')[:-1]
                 route_without_file = ''
+
+                actual_folder = route_actual_folder[-1]
 
                 for e, folder in enumerate(route_actual_folder):
                     if e >= 1:
@@ -125,11 +130,11 @@ def conv_video(route: str, convert_to: str, folder=False, delete_original=False)
 
             new_folder_name = f'[CT - File] {actual_file[:len(actual_file) - (len(extension) + 1)]}'
 
-            try:
-                os.mkdir(f'{route_without_file}/{new_folder_name}')
+            # try:
+            os.mkdir(f'{route_without_file}/{new_folder_name}')
 
-            except ValueError:
-                pass
+            # except ValueError:
+            #     pass
 
             video.write_videofile(
                 f'{route_without_file}/{new_folder_name}/{actual_file[:len(actual_file) - (len(extension) + 1)]}.{convert_to}')
@@ -139,42 +144,10 @@ def conv_video(route: str, convert_to: str, folder=False, delete_original=False)
 
             print('Hemos convertido tu archivo de manera satisfactoria! Revisalo.')
 
+conv_video(r'C:\Users\ferdh\Desktop\Projects\Youtube\Global Resources\Analog Video Package\Assets\Textures (Glitches)', 'mp4', True, False)
+
+
 
 def conv_image(route: str, convert_to: str, folder=False, delete_original=False):
     imgs_formats = ['BMP', 'GIF', 'JPG', 'JPEG', 'PNG', 'Bmp', 'Gif', 'Jpg', 'Jpeg',
-                    'Png', 'bpm', 'gif', 'jpg', 'jpeg', 'png']  # Formats Avalable
-
-    if folder:
-        # Directory Started Config.
-        content_acutal_folder = os.listdir(route)  # The list of absolutely all files in the given folder.
-
-        files_extensions = []  # List of the image extensions.
-        files_names = []  # List of the images names.
-
-        for content in content_acutal_folder:
-            file_extension = content[::-1][:content[::-1].find('.')][::-1]  # Extract file extension.
-            file_name = content[::-1][content[::-1].find('.'):][::-1][:-1]  # Extract file name.
-
-            if file_extension in imgs_formats:  # Validates if the file extension is in our
-                # list of supported formats.
-
-                files_names.append(file_name)  # Add name!
-                files_extensions.append(file_extension)  # Add extension
-
-        # Convert image folder:
-
-
-    else:
-        # Directory Started Config.
-        actual_folder = os.path.dirname(route)  # Sets the current folder.
-        actual_file = os.path.basename(route)  # Sets the current file.
-
-        file_extension = actual_file[::-1][:actual_file[::-1].find('.')][::-1]  # Sets the file extension.
-        file_name = actual_file[::-1][actual_file[::-1].find('.'):][::-1][:-1]  # Sets the file name.
-
-        # Convert Image:
-
-
-conv_image(
-    r'C:\Users\ferdh\Desktop\Projects\Youtube\Global Resources\Analog Video Package\Assets\Still Overlays\Scanlines.png',
-    'jpg', False, False)
+                    'Png']  # TODO: Poner los formatos en minuscula!

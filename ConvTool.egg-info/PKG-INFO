@@ -1,3 +1,19 @@
+Metadata-Version: 2.1
+Name: ConvTool
+Version: 0.3
+Summary: Convert your video files, or an ENTIRE folder with video files to a different format! 🥵
+Home-page: https://github.com/ElHaban3ro/ConvTool
+Author: ElHaban3ro
+Author-email: habanferd@gmail.com
+License: MIT
+Keywords: python converter video-processing video-converter image-processing image-converter
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # ConvTool
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellowgreen.svg?style=flat-square)](https://opensource.org/licenses/MIT) [![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg?style=flat-square&logo=python)](https://www.python.org/downloads/release/python-310/) [![PyPi Package](https://img.shields.io/badge/PyPi_Package-pip_install_ConvTool-yellow.svg?style=flat-square&logo=pypi)](https://pypi.org/project/ConvTool/)
@@ -94,3 +110,4 @@ conv = conv_video(folder = False, convert_to = 'mp4', delete_original = True, ro
 ---
 
 [![Contact Twitter](https://img.shields.io/badge/Twitter-ElHaban3ro-9cf.svg?style=for-the-badge&logo=twitter)](https://twitter.com/ElHaban3ro) [![Contact Discord](https://img.shields.io/badge/Discord-!%20Die()%231274-lightgray?style=for-the-badge&logo=discord)](https://discord.com) [![Contact Discord](https://img.shields.io/badge/GitHub-ElHaban3ro-lightgray?style=for-the-badge&logo=github)](https://github.com/ElHaban3ro)
+

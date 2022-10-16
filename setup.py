@@ -8,8 +8,8 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
+# with open('./requirements.txt', 'rb') as f:
+#     requirements = f.read().splitlines()
 
 
 
@@ -28,9 +28,7 @@ setup(
     url = 'https://github.com/ElHaban3ro/ConvTool',
     keywords = 'python converter video-processing video-converter image-processing image-converter',
     classifiers = [
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10'
     ],
-    install_requires=requirements
+    install_requires=['moviepy==1.0.3', 'Pillow==9.2.0']
 )
